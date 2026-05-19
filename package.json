@@ -1,5 +1,5 @@
 {
-  "name": "public-leads-harness",
+  "name": "@agent-pattern-labs/public-leads-harness",
   "version": "0.1.0",
   "description": "Agentic public-web lead discovery harness with portable ingest artifacts",
   "type": "module",
@@ -11,6 +11,9 @@
   },
   "bugs": {
     "url": "https://github.com/Agent-Pattern-Labs/leads-agentic-harness/issues"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "bin": {
     "public-leads": "bin/lead-harness.mjs",

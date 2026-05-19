@@ -175,7 +175,7 @@ function hasFlag(args, flag) {
 }
 
 function printHelp() {
-  console.log(`public-leads — CLI for the public-leads-harness package
+  console.log(`public-leads — CLI for the @agent-pattern-labs/public-leads-harness package
 
 Usage:
   public-leads <command> [args...]

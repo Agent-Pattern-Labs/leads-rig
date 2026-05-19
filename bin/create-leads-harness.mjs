@@ -16,7 +16,7 @@ if (HELP || positional.length === 0) {
   console.log(`create-public-leads-harness — scaffold a new lead discovery project
 
 Usage:
-  npx create-public-leads-harness <dir> [--force]
+  npx -p @agent-pattern-labs/public-leads-harness create-public-leads-harness <dir> [--force]
 
 After scaffolding:
   cd <dir>
@@ -48,10 +48,10 @@ write('package.json', JSON.stringify({
     'trace:list': 'public-leads trace:list',
     'trace:stats': 'public-leads trace:stats',
     'trace:show': 'public-leads trace:show',
-    'update-harness': 'npm update public-leads-harness @geometra/mcp && public-leads sync',
+    'update-harness': 'npm update @agent-pattern-labs/public-leads-harness @geometra/mcp && public-leads sync',
   },
   dependencies: {
-    'public-leads-harness': '^0.1.0',
+    '@agent-pattern-labs/public-leads-harness': '^0.1.0',
   },
   engines: {
     node: '>=20.6.0',
@@ -90,7 +90,7 @@ write('opencode.json', JSON.stringify({
 
 write('AGENTS.md', `# AGENTS — ${name}
 
-This is a consumer project for the public-leads-harness package. Keep private configuration, target domains, and local artifacts here; the shared harness files are symlinked from \`node_modules/public-leads-harness\` after \`npm install\`.
+This is a consumer project for the @agent-pattern-labs/public-leads-harness package. Keep private configuration, target domains, and local artifacts here; the shared harness files are symlinked from \`node_modules/@agent-pattern-labs/public-leads-harness\` after \`npm install\`.
 
 ## Local Files
 
@@ -133,7 +133,7 @@ output/*
 `);
 write('README.md', `# ${name}
 
-Lead discovery project powered by \`public-leads-harness\`.
+Lead discovery project powered by \`@agent-pattern-labs/public-leads-harness\`.
 
 ## Start
 

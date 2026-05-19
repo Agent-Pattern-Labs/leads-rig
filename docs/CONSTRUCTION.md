@@ -1,6 +1,6 @@
 # Construction
 
-`public-leads-harness` follows the reusable agentic harness pattern used by Agent Pattern Labs: a published harness package owns shared behavior, while consumer projects own private inputs, generated artifacts, and local overrides.
+`@agent-pattern-labs/public-leads-harness` follows the reusable agentic harness pattern used by Agent Pattern Labs: a published harness package owns shared behavior, while consumer projects own private inputs, generated artifacts, and local overrides.
 
 ## Construction Map
 
@@ -37,3 +37,4 @@
 6. Run `npm audit`.
 7. Run `npm pack` and confirm generated runtime surfaces are included.
 8. Scaffold a clean consumer project and test install-time sync from the packed package or source tree.
+9. Publish through GitHub Actions with `gh workflow run publish.yml --ref main`, or create a published release with `gh release create v0.1.0 --title v0.1.0 --generate-notes`.
