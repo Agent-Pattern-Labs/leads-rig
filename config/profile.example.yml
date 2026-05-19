@@ -2,13 +2,16 @@
 # Prefer environment variables for secrets in shared terminals.
 
 api:
-  base_url: "http://localhost:8081"
+  # Cold Agent Leads local API default. Set target_project to a local
+  # cold-agent-leads checkout to read ADMIN_API_TOKEN/ADMIN_EMAILS from .env.
+  base_url: "http://localhost:8080"
   ingest_path: "/api/lead-ingests"
-  operator_email: "ops@example.com"
-  operator_email_header: "X-Operator-Email"
+  target_project: ""
+  operator_email: "admin@example.com"
+  operator_email_header: "X-Admin-Email"
   auth_header: "Authorization"
   auth_scheme: "Bearer"
-  auth_token_env: "PUBLIC_LEADS_API_TOKEN"
+  auth_token_env: "ADMIN_API_TOKEN"
 
 crawl:
   max_pages: 10
@@ -17,7 +20,7 @@ crawl:
   user_agent: "PublicLeadsBot/0.1 (+https://example.com/public-leads)"
 
 lead_policy:
-  min_confidence: 40
+  min_confidence: 30
   allowed_email_types:
     - person
     - role

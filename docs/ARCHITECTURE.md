@@ -51,7 +51,7 @@ Generated harness config is tracked for Git/source installs and refreshed at pac
 ```text
 domain input
   -> mode routing (/public-leads pipeline|crawl|batch)
-  -> bounded public crawl workers
+  -> deterministic bounded public crawler or bounded crawl workers
   -> lead JSON artifacts
   -> public-leads validate
   -> public-leads manifest
@@ -63,6 +63,8 @@ domain input
 
 | Helper | Purpose |
 |---|---|
+| `scripts/crawl.mjs` | Crawls bounded public company pages and writes lead artifacts |
+| `scripts/pipeline.mjs` | Runs crawl, validation, manifest update, and optional ingest |
 | `scripts/validate-leads.mjs` | Normalizes and validates JSON/JSONL lead artifacts |
 | `scripts/manifest.mjs` | Records validated batches in `data/lead-manifest.json` |
 | `scripts/ingest.mjs` | Posts to the configured ingest endpoint |

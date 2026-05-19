@@ -18,6 +18,8 @@ npm install
 npm run verify
 npm run smoke:iso
 
+npx public-leads crawl --domains example.com --out data/lead-results.json
+npx public-leads pipeline --input data/domains.tsv --ingest --target-project /path/to/cold-agent-leads
 npx public-leads validate --input examples/sample-leads.json
 npx public-leads ingest --input examples/sample-leads.json --dry-run --out output/sample-ingest.json
 batch/batch-runner.sh --help
@@ -25,17 +27,17 @@ batch/batch-runner.sh --help
 
 ## Reference Ingest Handoff
 
-The default reference client posts to:
+The default reference client posts to the Cold Agent Leads ingest API:
 
 ```http
 POST /api/lead-ingests
-Authorization: Bearer $PUBLIC_LEADS_API_TOKEN
-X-Operator-Email: ops@example.com
+Authorization: Bearer $ADMIN_API_TOKEN
+X-Admin-Email: admin@example.com
 Content-Type: application/json
 ```
 
-All endpoint details are configurable through `config/profile.yml`, CLI flags, or environment variables. Payloads contain `jobId`, `domains`, `leads`, `results`, and `errors`, with the schema defined in `templates/lead-schema.json`.
+All endpoint details are configurable through `config/profile.yml`, CLI flags, environment variables, or `--target-project /path/to/cold-agent-leads` for reading that app's `.env` at runtime. Payloads contain `jobId`, `domains`, `leads`, `results`, and `errors`, with the schema defined in `templates/lead-schema.json`.
 
 Legacy aliases `lead-harness` and `create-leads-harness` remain available for compatibility.
 
-See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md), [docs/SETUP.md](docs/SETUP.md), and [batch/README.md](batch/README.md).
+See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md), [docs/CONSTRUCTION.md](docs/CONSTRUCTION.md), [docs/SETUP.md](docs/SETUP.md), and [batch/README.md](batch/README.md).

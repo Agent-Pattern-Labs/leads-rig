@@ -12,6 +12,8 @@ const PROJECT_DIR = process.env.PUBLIC_LEADS_PROJECT || process.env.LEAD_HARNESS
 const require = createRequire(import.meta.url);
 
 const commands = {
+  crawl: 'scripts/crawl.mjs',
+  pipeline: 'scripts/pipeline.mjs',
   validate: 'scripts/validate-leads.mjs',
   manifest: 'scripts/manifest.mjs',
   ingest: 'scripts/ingest.mjs',
@@ -179,6 +181,8 @@ Usage:
   public-leads <command> [args...]
 
 Core commands:
+  crawl         Crawl public company pages and write a lead artifact
+  pipeline      Crawl, validate, manifest, and optionally ingest leads
   validate      Validate lead artifacts against the local contract
   manifest      Build/update data/lead-manifest.json from lead artifacts
   ingest        Submit a validated payload to the configured ingest API

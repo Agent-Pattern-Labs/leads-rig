@@ -40,9 +40,11 @@ Available commands:
   /public-leads review    -> Inspect lead artifacts and ingest state
 
 Local commands:
+  npx public-leads crawl --input data/domains.tsv --out data/lead-results.json
+  npx public-leads pipeline --input data/domains.tsv --ingest --target-project /path/to/cold-agent-leads
   npx public-leads validate --input data/lead-results.json
   npx public-leads manifest --input data/lead-results.json
-  npx public-leads ingest --input data/lead-results.json --api https://api.example.com
+  npx public-leads ingest --input data/lead-results.json --target-project /path/to/cold-agent-leads
   npx public-leads verify
 ```
 

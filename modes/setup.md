@@ -17,6 +17,7 @@ Use this when the user asks to configure or inspect the lead harness.
    - `api.auth_header`
    - `api.auth_scheme`
    - `api.auth_token_env`
+   - `api.target_project` when using a local Cold Agent Leads checkout for `.env` credentials
 4. Run `npx public-leads verify`.
 
 ## Output

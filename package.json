@@ -22,6 +22,8 @@
     "verify": "node verify-pipeline.mjs",
     "build:config": "iso-route build models.yaml --out . && iso-harness build",
     "smoke:iso": "iso-route build models.yaml --out . --dry-run && iso-harness build --dry-run",
+    "lead:crawl": "node bin/lead-harness.mjs crawl",
+    "lead:pipeline": "node bin/lead-harness.mjs pipeline",
     "lead:validate": "node bin/lead-harness.mjs validate",
     "lead:manifest": "node bin/lead-harness.mjs manifest",
     "lead:ingest": "node bin/lead-harness.mjs ingest",

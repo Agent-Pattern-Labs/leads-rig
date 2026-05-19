@@ -32,13 +32,20 @@ Then edit:
 Use environment variables for secrets:
 
 ```bash
-export PUBLIC_LEADS_API_TOKEN=...
+export ADMIN_API_TOKEN=...
 ```
 
 ## Validate A Payload
 
 ```bash
 npx public-leads validate --input examples/sample-leads.json
+```
+
+## Crawl Domains
+
+```bash
+npx public-leads crawl --input data/domains.tsv --out data/lead-results.json
+npx public-leads pipeline --input data/domains.tsv --out data/lead-results.json
 ```
 
 ## Dry-Run Ingest
@@ -50,13 +57,15 @@ npx public-leads ingest --input examples/sample-leads.json --dry-run --out outpu
 ## Live Ingest
 
 ```bash
-npx public-leads ingest --input data/lead-results.json --api https://api.example.com
+npx public-leads pipeline --input data/domains.tsv --ingest --target-project /path/to/cold-agent-leads
+npx public-leads ingest --input data/lead-results.json --target-project /path/to/cold-agent-leads
 ```
 
 Required request settings come from flags, environment, or `config/profile.yml`:
 
 - `api.base_url`
 - `api.ingest_path`
+- `api.target_project`
 - `api.operator_email`
 - `api.operator_email_header`
 - `api.auth_header`

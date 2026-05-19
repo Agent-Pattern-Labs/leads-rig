@@ -31,6 +31,8 @@ const requiredFiles = [
   'modes/ingest.md',
   'batch/batch-prompt.md',
   'batch/batch-runner.sh',
+  'scripts/crawl.mjs',
+  'scripts/pipeline.mjs',
   'scripts/batch-orchestrator.mjs',
   'docs/ARCHITECTURE.md',
 ];

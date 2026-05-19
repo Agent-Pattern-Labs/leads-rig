@@ -40,6 +40,8 @@ write('package.json', JSON.stringify({
   scripts: {
     sync: 'public-leads sync',
     verify: 'public-leads verify',
+    crawl: 'public-leads crawl',
+    pipeline: 'public-leads pipeline',
     validate: 'public-leads validate',
     manifest: 'public-leads manifest',
     ingest: 'public-leads ingest',

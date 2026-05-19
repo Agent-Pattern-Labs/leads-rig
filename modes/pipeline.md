@@ -14,11 +14,13 @@ Read domains from the first available source:
 
 1. Build a deduped candidate list.
 2. Drop domains already represented in the manifest unless the user asks to retry.
-3. For 1-2 domains, crawl inline or dispatch at most two procedural subagents.
-4. For 3+ domains, use `batch/batch-runner.sh`.
-5. Validate every artifact with `npx public-leads validate`.
-6. Merge validated artifacts into a manifest with `npx public-leads manifest --input <artifact>`.
-7. Ask for confirmation before real ingest unless the user already requested ingest.
+3. Prefer the deterministic end-to-end command for normal public pages:
+   `npx public-leads pipeline --input data/domains.tsv --out data/lead-results.json`
+4. Use browser/MCP workers only when the deterministic crawler cannot reach a public page or the site requires rendering.
+5. For browser-heavy batch work, use `batch/batch-runner.sh --parallel 2`.
+6. Validate every artifact with `npx public-leads validate`.
+7. Merge validated artifacts into a manifest with `npx public-leads manifest --input <artifact>`.
+8. Ingest with `npx public-leads pipeline --ingest --target-project /path/to/cold-agent-leads` only when upload is requested.
 
 ## Output
 

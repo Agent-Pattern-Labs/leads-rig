@@ -25,7 +25,7 @@ npx public-leads ingest --input <artifact> --dry-run --out data/ingest-response.
 ## Live Ingest
 
 ```bash
-npx public-leads ingest --input <artifact> --out data/ingest-response.json
+npx public-leads ingest --input <artifact> --target-project /path/to/cold-agent-leads --out data/ingest-response.json
 ```
 
 ## Output
