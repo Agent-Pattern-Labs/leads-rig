@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "opencode": {
+      "instructions": [
+        "templates/lead-schema.json",
+        "templates/states.yml"
+      ],
+      "small_model": "opencode-go/deepseek-v4-flash"
+    }
+  }
+}

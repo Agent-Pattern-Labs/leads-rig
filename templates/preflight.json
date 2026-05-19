@@ -1,0 +1,19 @@
+{
+  "version": 1,
+  "workflows": [
+    {
+      "name": "publicleads.crawl",
+      "maxParallel": 2,
+      "requiredSourceFields": ["domain"],
+      "blockGates": ["duplicate", "robotsBlocked", "privateSource"],
+      "warnGates": ["lowSignal", "noCompany"]
+    },
+    {
+      "name": "publicleads.ingest",
+      "maxParallel": 1,
+      "requiredSourceFields": ["input", "leadCount", "validationPath"],
+      "blockGates": ["validationErrors", "missingToken", "missingOperatorEmail"],
+      "warnGates": ["validationWarnings"]
+    }
+  ]
+}

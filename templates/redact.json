@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "rules": [
+    {
+      "name": "admin-token",
+      "pattern": "(?i)(authorization:\\s*bearer\\s+)[A-Za-z0-9._~+\\/-]+",
+      "replacement": "$1[REDACTED]"
+    },
+    {
+      "name": "env-token",
+      "pattern": "(PUBLIC_LEADS_API_TOKEN=|LEAD_HARNESS_API_TOKEN=|ADMIN_API_TOKEN=)[^\\s]+",
+      "replacement": "$1[REDACTED]"
+    }
+  ]
+}

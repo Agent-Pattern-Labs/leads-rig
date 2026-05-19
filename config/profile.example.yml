@@ -1,0 +1,31 @@
+# Lead ingest settings for the reference client.
+# Prefer environment variables for secrets in shared terminals.
+
+api:
+  base_url: "http://localhost:8081"
+  ingest_path: "/api/lead-ingests"
+  operator_email: "ops@example.com"
+  operator_email_header: "X-Operator-Email"
+  auth_header: "Authorization"
+  auth_scheme: "Bearer"
+  auth_token_env: "PUBLIC_LEADS_API_TOKEN"
+
+crawl:
+  max_pages: 10
+  max_domains_per_batch: 50
+  concurrency: 2
+  user_agent: "PublicLeadsBot/0.1 (+https://example.com/public-leads)"
+
+lead_policy:
+  min_confidence: 40
+  allowed_email_types:
+    - person
+    - role
+    - contact_path
+  required_fields:
+    - domain
+    - sourceUrl
+    - evidence
+    - emailType
+    - verificationStatus
+    - confidence

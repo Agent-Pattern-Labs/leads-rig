@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "facts": [
+    {
+      "name": "lead",
+      "sources": ["data/lead-results*.json", "batch/lead-results*.json"]
+    },
+    {
+      "name": "ingest",
+      "sources": ["data/ingest-response.json", "batch/ingest-response*.json"]
+    }
+  ]
+}

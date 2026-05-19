@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "sources": [
+    {
+      "name": "lead-artifacts",
+      "globs": ["data/lead-results*.json", "batch/lead-results*.json", "batch/ingest-payload*.json"]
+    },
+    {
+      "name": "lead-manifest",
+      "globs": ["data/lead-manifest.json"]
+    }
+  ]
+}

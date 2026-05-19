@@ -1,0 +1,57 @@
+---
+description: Lead discovery command center -- crawl domains, validate artifacts, and ingest batches into a configured API.
+user_invocable: true
+args: mode
+targets:
+  claude: skip
+  cursor: skip
+  codex: skip
+---
+
+# public-leads -- Router
+
+## Mode Routing
+
+Determine the mode from `{{mode}}`:
+
+| Input | Mode |
+|---|---|
+| empty/no args | discovery |
+| `setup` | setup |
+| `crawl` | crawl |
+| `pipeline` | pipeline |
+| `batch` | batch |
+| `ingest` | ingest |
+| `review` | review |
+| domain list or lead request | pipeline |
+
+If the input is a domain, URL, or pasted domain list, run `pipeline`.
+
+## Discovery
+
+Show this menu:
+
+```
+public-leads -- Command Center
+
+Available commands:
+  /public-leads setup     -> Create/check config and domain input files
+  /public-leads crawl     -> Crawl one or more assigned domains
+  /public-leads pipeline  -> Process data/pipeline.md or data/domains.tsv
+  /public-leads batch     -> Run batch/batch-runner.sh
+  /public-leads ingest    -> Submit validated leads to the configured ingest API
+  /public-leads review    -> Inspect lead artifacts and ingest state
+
+Local commands:
+  npx public-leads validate --input data/lead-results.json
+  npx public-leads manifest --input data/lead-results.json
+  npx public-leads ingest --input data/lead-results.json --api https://api.example.com
+  npx public-leads verify
+```
+
+## Load Context
+
+Read `modes/_shared.md` plus `modes/{mode}.md` for `crawl`, `pipeline`, `batch`, and `ingest`.
+Read only `modes/{mode}.md` for `setup` and `review`.
+
+Execute the selected mode exactly.

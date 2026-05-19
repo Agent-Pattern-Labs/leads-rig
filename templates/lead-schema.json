@@ -1,0 +1,124 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:public-leads-harness:templates:lead-schema",
+  "title": "Lead ingest payload",
+  "description": "Portable payload for lead review or ingest APIs.",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["leads"],
+  "properties": {
+    "jobId": {
+      "type": "string",
+      "description": "Optional stable crawl job ID. The app generates one when omitted."
+    },
+    "domains": {
+      "type": "array",
+      "items": { "type": "string" },
+      "default": []
+    },
+    "leads": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/lead" }
+    },
+    "results": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/result" },
+      "default": []
+    },
+    "errors": {
+      "type": "array",
+      "items": { "type": "string" },
+      "default": []
+    }
+  },
+  "$defs": {
+    "lead": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "domain",
+        "emailType",
+        "sourceUrl",
+        "evidence",
+        "extractionMethod",
+        "verificationStatus",
+        "confidence"
+      ],
+      "properties": {
+        "id": { "type": "string" },
+        "company": { "type": "string" },
+        "domain": { "type": "string" },
+        "websiteUrl": { "type": "string" },
+        "contactName": { "type": "string" },
+        "title": { "type": "string" },
+        "email": { "type": "string" },
+        "emailType": {
+          "type": "string",
+          "enum": ["person", "role", "blocked", "contact_path", "unknown"]
+        },
+        "sourceUrl": { "type": "string" },
+        "sourceLabel": { "type": "string" },
+        "evidence": { "type": "string" },
+        "extractionMethod": { "type": "string" },
+        "verificationStatus": {
+          "type": "string",
+          "enum": ["verified", "mx_verified", "unverified", "not_applicable", "blocked", "unknown"]
+        },
+        "confidence": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "warnings": {
+          "type": "array",
+          "items": { "type": "string" },
+          "default": []
+        },
+        "foundAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "result": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["domain"],
+      "properties": {
+        "domain": { "type": "string" },
+        "websiteUrl": { "type": "string" },
+        "leads": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/lead" },
+          "default": []
+        },
+        "pages": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/pageVisit" },
+          "default": []
+        },
+        "warnings": {
+          "type": "array",
+          "items": { "type": "string" },
+          "default": []
+        },
+        "completedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "pageVisit": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["url"],
+      "properties": {
+        "url": { "type": "string" },
+        "title": { "type": "string" },
+        "statusCode": { "type": "integer" },
+        "emailsFound": { "type": "integer" },
+        "error": { "type": "string" }
+      }
+    }
+  }
+}

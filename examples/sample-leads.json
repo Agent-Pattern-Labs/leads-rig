@@ -1,0 +1,57 @@
+{
+  "jobId": "sample-agentic-harness-job",
+  "domains": ["example.com"],
+  "leads": [
+    {
+      "company": "Example",
+      "domain": "example.com",
+      "websiteUrl": "https://example.com/",
+      "contactName": "Jane Founder",
+      "title": "Founder",
+      "email": "jane@example.com",
+      "emailType": "person",
+      "sourceUrl": "https://example.com/about",
+      "sourceLabel": "About",
+      "evidence": "Jane Founder is listed on the public About page with jane@example.com.",
+      "extractionMethod": "agentic_harness_public_page",
+      "verificationStatus": "unverified",
+      "confidence": 82,
+      "warnings": [],
+      "foundAt": "2026-05-15T00:00:00.000Z"
+    },
+    {
+      "company": "Example",
+      "domain": "example.com",
+      "websiteUrl": "https://example.com/",
+      "title": "Contact form",
+      "email": "",
+      "emailType": "contact_path",
+      "sourceUrl": "https://example.com/contact",
+      "sourceLabel": "Contact",
+      "evidence": "The public contact page contains a general inquiry form.",
+      "extractionMethod": "agentic_harness_contact_form",
+      "verificationStatus": "not_applicable",
+      "confidence": 35,
+      "warnings": [],
+      "foundAt": "2026-05-15T00:00:00.000Z"
+    }
+  ],
+  "results": [
+    {
+      "domain": "example.com",
+      "websiteUrl": "https://example.com/",
+      "leads": [],
+      "pages": [
+        {
+          "url": "https://example.com/about",
+          "title": "About Example",
+          "statusCode": 200,
+          "emailsFound": 1
+        }
+      ],
+      "warnings": [],
+      "completedAt": "2026-05-15T00:00:00.000Z"
+    }
+  ],
+  "errors": []
+}

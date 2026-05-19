@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "bundles": [
+    {
+      "name": "crawl",
+      "budget": 24000,
+      "files": ["modes/_shared.md", "modes/crawl.md", "templates/lead-schema.json"]
+    },
+    {
+      "name": "pipeline",
+      "budget": 26000,
+      "files": ["modes/_shared.md", "modes/pipeline.md", "templates/lead-schema.json", "data/pipeline.md"]
+    },
+    {
+      "name": "ingest",
+      "budget": 18000,
+      "files": ["modes/_shared.md", "modes/ingest.md", "templates/lead-schema.json", "config/profile.yml"]
+    }
+  ]
+}

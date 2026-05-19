@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "events": [
+    {
+      "name": "review-after-ingest",
+      "afterStatus": "ingested",
+      "dueInDays": 1
+    }
+  ]
+}

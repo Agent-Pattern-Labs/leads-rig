@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "workflows": [
+    {
+      "name": "publicleads.ingest",
+      "terminalStatuses": ["INGESTED", "INGEST FAILED", "DRY RUN"],
+      "requiredArtifacts": ["input", "responsePath"],
+      "successStatuses": ["INGESTED", "DRY RUN"]
+    }
+  ]
+}

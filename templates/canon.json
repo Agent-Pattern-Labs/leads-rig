@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "profiles": [
+    {
+      "name": "publicleads",
+      "entities": {
+        "domain": {
+          "case": "lower",
+          "stripPrefixes": ["http://", "https://", "www."],
+          "stripSuffixes": ["/"],
+          "collapseWhitespace": true
+        },
+        "company": {
+          "case": "lower",
+          "collapseWhitespace": true,
+          "stripPunctuation": true,
+          "stripSuffixes": [" inc", " llc", " ltd", " co", " corp", " corporation"]
+        },
+        "lead": {
+          "case": "lower",
+          "join": ["domain", "email", "contactName", "title"]
+        }
+      }
+    }
+  ]
+}

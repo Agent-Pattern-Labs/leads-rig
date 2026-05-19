@@ -1,0 +1,16 @@
+{
+  "servers": {
+    "geometra": {
+      "command": "npx",
+      "args": ["-y", "@geometra/mcp@1.61.3"]
+    },
+    "state-trace": {
+      "command": "state-trace-mcp",
+      "env": {
+        "STATE_TRACE_STORAGE_PATH": ".state-trace/memory.db",
+        "STATE_TRACE_NAMESPACE": "public-leads-harness",
+        "STATE_TRACE_CAPACITY_LIMIT": "256"
+      }
+    }
+  }
+}

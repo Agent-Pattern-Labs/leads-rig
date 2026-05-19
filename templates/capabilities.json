@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "roles": {
+    "general-free": {
+      "description": "Procedural crawl, extract, validate, and ingest helper.",
+      "tools": ["geometra", "filesystem", "bash"],
+      "filesystem": ["read", "write"],
+      "network": ["public-web", "lead-ingest-api"]
+    },
+    "general-paid": {
+      "description": "Quality-sensitive lead fit and evidence review helper.",
+      "tools": ["geometra", "filesystem", "bash"],
+      "filesystem": ["read", "write"],
+      "network": ["public-web"]
+    },
+    "glm-minimal": {
+      "description": "Narrow JSON transform helper.",
+      "tools": [],
+      "filesystem": [],
+      "network": []
+    }
+  }
+}

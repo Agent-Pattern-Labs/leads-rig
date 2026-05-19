@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "artifacts": [
+    {
+      "kind": "ingest-payload",
+      "inputs": ["lead-results"],
+      "outputs": ["ingest-response"]
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "rubrics": [
+    {
+      "name": "lead-quality",
+      "scale": [1, 5],
+      "dimensions": [
+        { "id": "source_quality", "weight": 0.3 },
+        { "id": "person_specificity", "weight": 0.25 },
+        { "id": "verification", "weight": 0.25 },
+        { "id": "commercial_relevance", "weight": 0.2 }
+      ],
+      "gates": {
+        "ingest": { "min": 2.5 }
+      }
+    }
+  ]
+}

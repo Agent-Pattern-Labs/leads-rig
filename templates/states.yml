@@ -1,0 +1,25 @@
+states:
+  - id: discovered
+    label: Discovered
+    aliases: [found, queued]
+  - id: crawling
+    label: Crawling
+    aliases: [running, in_progress]
+  - id: extracted
+    label: Extracted
+    aliases: [parsed, collected]
+  - id: validated
+    label: Validated
+    aliases: [checked]
+  - id: ready_for_ingest
+    label: Ready for ingest
+    aliases: [ready]
+  - id: ingested
+    label: Ingested
+    aliases: [stored, submitted]
+  - id: failed
+    label: Failed
+    aliases: [error]
+  - id: skipped
+    label: Skipped
+    aliases: [skip]

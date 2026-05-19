@@ -1,0 +1,32 @@
+# Public Leads Harness model policy.
+#
+# Keeps OpenCode on the reliable DeepSeek V4 Flash route. Agents bind to these roles through
+# iso/agents/*.md:
+#   @general-free  -> role: fast
+#   @general-paid  -> role: quality
+#   @glm-minimal   -> role: minimal
+
+extends: standard
+
+default:
+  targets:
+    opencode:
+      provider: opencode
+      model: opencode-go/deepseek-v4-flash
+
+roles:
+  fast:
+    targets:
+      opencode:
+        provider: opencode
+        model: opencode-go/deepseek-v4-flash
+  quality:
+    targets:
+      opencode:
+        provider: opencode
+        model: opencode-go/deepseek-v4-flash
+  minimal:
+    targets:
+      opencode:
+        provider: opencode
+        model: opencode-go/deepseek-v4-flash

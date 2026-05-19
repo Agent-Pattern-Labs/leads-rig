@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "queues": [
+    {
+      "name": "ready-for-ingest",
+      "source": "data/lead-manifest.json",
+      "sort": ["errors:asc", "leadCount:desc", "generatedAt:asc"]
+    }
+  ]
+}
