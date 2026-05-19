@@ -1,0 +1,61 @@
+---
+description: Project instructions
+alwaysApply: true
+---
+
+# Agent: public-leads-harness
+
+Agentic public-web lead discovery harness. It crawls company domains, extracts reviewable public-source contacts, validates artifacts against the local ingest contract, and can submit completed batches to a configured ingest API.
+
+## Hard Limits
+
+- [H1] Only collect public-source business contact data. Do not infer, guess, brute-force, or enrich private email addresses. Every lead needs a source URL and evidence excerpt.
+- [H2] Respect robots.txt, terms, rate limits, and site intent. If a page blocks crawling or is not public, record a warning and move on.
+- [H3] Never send outreach from this harness. The output is reviewable lead records and ingest-ready artifacts, not email campaigns.
+- [H4] Use file-backed artifacts before ingest. A subagent prose summary is not enough; write validated JSON/JSONL first, then ingest.
+- [H5] Do not paste API tokens, proxy credentials, or cookies into task prompts or summaries. Reference `config/profile.yml` or environment variables by name only.
+- [H6] For batch domain crawling, dispatch at most 2 subagents per round and wait for final artifact paths before launching the next round.
+- [H7] Before using browser/MCP crawling in a batch round, run Geometra cleanup: `geometra_list_sessions()` then `geometra_disconnect({ closeBrowser: true })`.
+
+## Defaults
+
+- [D1] Use `@general-free` for procedural crawl/extract/validate work, `@general-paid` for quality-sensitive ICP research and lead-fit reasoning, and `@glm-minimal` for narrow JSON transforms.
+- [D2] Use deterministic local helpers when they can validate, normalize, manifest, preflight, postflight, or ingest artifacts.
+- [D3] Read the active mode file before executing. Mode files own output shapes and gates.
+- [D4] Prefer official company websites and high-signal pages: home, contact, about, team, leadership, people, press, blog, careers, and legal pages.
+- [D5] Keep artifacts source-backed. Every emitted lead should include `domain`, `sourceUrl`, `evidence`, `emailType`, `extractionMethod`, `verificationStatus`, and `confidence`.
+
+## Procedure
+
+1. Check for `config/profile.yml` and `data/domains.tsv` or `data/pipeline.md`; onboard if missing.
+2. Pick and name the mode from Routing. If no mode fits, ask.
+3. Read `modes/_shared.md` plus `modes/{mode}.md` unless the mode says otherwise.
+4. Normalize domains and dedupe against prior artifacts.
+5. Crawl bounded, public pages only. Preserve warnings and page visits.
+6. Validate lead artifacts with `npx public-leads validate`.
+7. Create or update the manifest with `npx public-leads manifest`.
+8. Ingest only validated payloads with `npx public-leads ingest`.
+9. Run `npx public-leads verify` before ending a batch workflow.
+
+## Routing
+
+| If the user... | Mode |
+|---|---|
+| wants to crawl domains | `crawl` |
+| gives a domain list or asks for leads | `pipeline` |
+| asks to submit/store leads | `ingest` |
+| asks to inspect lead state | `review` |
+| asks for batch processing | `batch` |
+| asks for setup | `setup` |
+| otherwise | Ask which mode fits |
+
+## Output
+
+Output shape is mode-specific. Keep user-facing status terse and ground claims in files, command output, or ingest responses.
+
+## Reference
+
+- `modes/{mode}.md` for active workflow instructions.
+- `templates/lead-schema.json` for the lead artifact contract.
+- `templates/states.yml` for canonical run and ingest states.
+- `docs/ARCHITECTURE.md` for harness architecture.

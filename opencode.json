@@ -1,0 +1,43 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "model": "opencode-go/deepseek-v4-flash",
+  "agent": {
+    "fast": {
+      "model": "opencode-go/deepseek-v4-flash"
+    },
+    "quality": {
+      "model": "opencode-go/deepseek-v4-flash"
+    },
+    "minimal": {
+      "model": "opencode-go/deepseek-v4-flash"
+    }
+  },
+  "mcp": {
+    "geometra": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "@geometra/mcp@1.61.3"
+      ],
+      "environment": {}
+    },
+    "state-trace": {
+      "type": "local",
+      "command": [
+        "state-trace-mcp"
+      ],
+      "environment": {
+        "STATE_TRACE_STORAGE_PATH": ".state-trace/memory.db",
+        "STATE_TRACE_NAMESPACE": "public-leads-harness",
+        "STATE_TRACE_CAPACITY_LIMIT": "256"
+      }
+    }
+  },
+  "instructions": [
+    "templates/lead-schema.json",
+    "templates/states.yml",
+    ".opencode/instructions.md"
+  ],
+  "small_model": "opencode-go/deepseek-v4-flash"
+}

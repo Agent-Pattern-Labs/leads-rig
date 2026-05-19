@@ -1,0 +1,21 @@
+{
+  "default": {
+    "provider": "anthropic",
+    "model": "claude-sonnet-4-6"
+  },
+  "roles": {
+    "fast": {
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5"
+    },
+    "quality": {
+      "provider": "anthropic",
+      "model": "claude-opus-4-7",
+      "reasoning": "high"
+    },
+    "minimal": {
+      "provider": "anthropic",
+      "model": "claude-haiku-4-5"
+    }
+  }
+}

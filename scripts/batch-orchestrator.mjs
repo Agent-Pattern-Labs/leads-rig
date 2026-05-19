@@ -20,6 +20,7 @@ const LOGS_DIR = join(BATCH_DIR, 'logs');
 const WORKFLOW_DIR = join(PROJECT_DIR, process.env.PUBLIC_LEADS_WORKFLOW_DIR || process.env.LEAD_HARNESS_WORKFLOW_DIR || '.public-leads-runs');
 const LOCK_FILE = join(BATCH_DIR, 'batch-runner.pid');
 const STATE_HEADER = 'id\tdomain\tstatus\tstarted_at\tcompleted_at\tartifact\tlead_count\terror\tretries';
+const MAX_PARALLEL_WORKERS = 2;
 
 function usage() {
   console.log(`public-leads batch runner - process company domains with AI CLI workers
@@ -29,7 +30,9 @@ Usage:
 
 Options:
   --runner NAME        Worker CLI: opencode or codex (default: opencode)
-  --parallel N         Number of parallel workers (default: 1, max recommended: 2)
+  --parallel N         Number of parallel workers (default: 1, max: 2)
+  --allow-unsafe-workers
+                       Enable worker CLI permission-bypass flags (explicit opt-in)
   --dry-run            Show pending domains without executing workers
   --retry-failed       Only retry rows marked failed
   --start-from N       Start from numeric id N
@@ -42,13 +45,12 @@ Input:
 `);
 }
 
-const options = parseArgs(process.argv.slice(2));
-if (options.help) {
-  usage();
-  process.exit(0);
-}
-
 try {
+  const options = parseArgs(process.argv.slice(2));
+  if (options.help) {
+    usage();
+    process.exit(0);
+  }
   await main(options);
 } catch (error) {
   console.error(error instanceof Error ? error.message : String(error));
@@ -114,6 +116,7 @@ function parseArgs(argv) {
   const opts = {
     runner: process.env.PUBLIC_LEADS_BATCH_RUNNER || process.env.LEAD_HARNESS_BATCH_RUNNER || 'opencode',
     parallel: 1,
+    allowUnsafeWorkers: envFlag('PUBLIC_LEADS_ALLOW_UNSAFE_WORKERS') || envFlag('LEAD_HARNESS_ALLOW_UNSAFE_WORKERS'),
     dryRun: false,
     retryFailed: false,
     startFrom: 0,
@@ -129,7 +132,8 @@ function parseArgs(argv) {
       return argv[i];
     };
     if (arg === '--runner') opts.runner = next();
-    else if (arg === '--parallel') opts.parallel = positiveInt(next(), '--parallel');
+    else if (arg === '--parallel') opts.parallel = boundedParallel(next(), '--parallel');
+    else if (arg === '--allow-unsafe-workers') opts.allowUnsafeWorkers = true;
     else if (arg === '--dry-run') opts.dryRun = true;
     else if (arg === '--retry-failed') opts.retryFailed = true;
     else if (arg === '--start-from') opts.startFrom = nonNegativeInt(next(), '--start-from');
@@ -296,7 +300,7 @@ async function processDomain(workflow, item, opts) {
   });
 
   const prompt = buildWorkerPrompt(item, artifact);
-  const run = await withWorkerLiveness(workflow, item, logFile, () => runWorker(opts.runner, prompt, logFile));
+  const run = await withWorkerLiveness(workflow, item, logFile, () => runWorker(opts, prompt, logFile));
   const statuses = parseStatusLines(run.output);
   const status = statuses.get(item.id);
 
@@ -365,15 +369,18 @@ Finish with one JSON status line:
 {"id":"${item.id}","status":"completed|failed","domain":"${item.domain}","leadCount":0,"artifact":"${artifact}","error":null}`;
 }
 
-async function runWorker(runner, prompt, logFile) {
-  if (runner === 'codex') return runCodex(prompt, logFile);
-  return runOpencode(prompt, logFile);
+async function runWorker(opts, prompt, logFile) {
+  if (opts.runner === 'codex') return runCodex(prompt, logFile, opts);
+  return runOpencode(prompt, logFile, opts);
 }
 
-async function runOpencode(prompt, logFile) {
+async function runOpencode(prompt, logFile, opts) {
   await ensureDir(dirname(logFile));
   return new Promise((resolveRun) => {
-    const child = spawn('opencode', ['run', '--dangerously-skip-permissions', '--file', PROMPT_FILE, prompt], {
+    const args = ['run'];
+    if (opts.allowUnsafeWorkers) args.push('--dangerously-skip-permissions');
+    args.push('--file', PROMPT_FILE, prompt);
+    const child = spawn('opencode', args, {
       cwd: PROJECT_DIR,
       env: {
         ...process.env,
@@ -386,17 +393,14 @@ async function runOpencode(prompt, logFile) {
   });
 }
 
-async function runCodex(prompt, logFile) {
+async function runCodex(prompt, logFile, opts) {
   await ensureDir(dirname(logFile));
   const basePrompt = await readTextIfExists(PROMPT_FILE);
   return new Promise((resolveRun) => {
-    const child = spawn('codex', [
-      'exec',
-      '--dangerously-bypass-approvals-and-sandbox',
-      '-C',
-      PROJECT_DIR,
-      `${basePrompt.trim()}\n\n${prompt}`,
-    ], {
+    const args = ['exec'];
+    if (opts.allowUnsafeWorkers) args.push('--dangerously-bypass-approvals-and-sandbox');
+    args.push('-C', PROJECT_DIR, `${basePrompt.trim()}\n\n${prompt}`);
+    const child = spawn('codex', args, {
       cwd: PROJECT_DIR,
       env: {
         ...process.env,
@@ -491,10 +495,22 @@ function positiveInt(value, label) {
   return n;
 }
 
+function boundedParallel(value, label) {
+  const n = positiveInt(value, label);
+  if (n > MAX_PARALLEL_WORKERS) {
+    throw new Error(`${label} must be ${MAX_PARALLEL_WORKERS} or less; split larger queues into multiple rounds`);
+  }
+  return n;
+}
+
 function nonNegativeInt(value, label) {
   const n = Number.parseInt(value, 10);
   if (!Number.isInteger(n) || n < 0) throw new Error(`${label} must be a non-negative integer`);
   return n;
+}
+
+function envFlag(name) {
+  return /^(1|true|yes)$/i.test(String(process.env[name] || '').trim());
 }
 
 function sanitizeWorkflowId(value) {

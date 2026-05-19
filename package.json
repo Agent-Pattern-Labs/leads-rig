@@ -3,6 +3,15 @@
   "version": "0.1.0",
   "description": "Agentic public-web lead discovery harness with portable ingest artifacts",
   "type": "module",
+  "author": "Razroo",
+  "homepage": "https://github.com/Agent-Pattern-Labs/leads-agentic-harness#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Agent-Pattern-Labs/leads-agentic-harness.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Agent-Pattern-Labs/leads-agentic-harness/issues"
+  },
   "bin": {
     "public-leads": "bin/lead-harness.mjs",
     "create-public-leads-harness": "bin/create-leads-harness.mjs",
@@ -106,6 +115,7 @@
     ".cursor/iso-route.md",
     ".opencode/",
     ".codex/",
+    ".pi/",
     ".mcp.json",
     "CLAUDE.md",
     "AGENTS.md",

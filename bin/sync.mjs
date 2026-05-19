@@ -50,6 +50,8 @@ const links = [
   { src: '.opencode/skills/public-leads.md', dst: '.opencode/skills/public-leads.md' },
   { src: '.opencode/skills/lead-harness.md', dst: '.opencode/skills/lead-harness.md' },
   { src: '.opencode/agents', dst: '.opencode/agents' },
+  { src: '.pi/skills', dst: '.pi/skills' },
+  { src: '.pi/prompts', dst: '.pi/prompts' },
   { src: 'models.yaml', dst: 'models.yaml' },
   { src: 'modes', dst: 'modes' },
   { src: 'templates', dst: 'templates' },

@@ -40,9 +40,11 @@ This generates:
 - `.opencode/skills/public-leads.md`
 - `.codex/config.toml`
 - `.cursor/rules/*`
+- `.pi/skills/*`
+- `.pi/prompts/*`
 - `.mcp.json`
 
-Generated files are gitignored in the harness repo and included at package time through `prepack`.
+Generated harness config is tracked for Git/source installs and refreshed at package time through `prepack`.
 
 ## Runtime Flow
 

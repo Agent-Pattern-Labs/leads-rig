@@ -20,6 +20,8 @@ batch/batch-runner.sh --parallel 2
 batch/batch-runner.sh --runner codex --parallel 2
 ```
 
+`--parallel` is capped at `2` to keep browser-heavy work bounded. Worker CLI permission-bypass flags are disabled by default; pass `--allow-unsafe-workers` only in a trusted local workspace when you explicitly want the old unsafe behavior.
+
 The runner writes:
 
 - `batch/batch-state.tsv`
