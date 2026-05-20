@@ -1,6 +1,6 @@
 # Architecture
 
-`@agent-pattern-labs/public-leads-harness` follows a package-oriented harness pattern.
+`@agent-pattern-labs/leads-rig` follows a package-oriented harness pattern.
 
 ## Package Architecture
 
@@ -8,7 +8,7 @@ The harness repo is the npm package. Consumer projects install it, keep private 
 
 ```text
 consumer-project/
-├── package.json                    # depends on @agent-pattern-labs/public-leads-harness
+├── package.json                    # depends on @agent-pattern-labs/leads-rig
 ├── opencode.json                   # thin local config
 ├── config/profile.yml              # local API settings and secret env names
 ├── data/domains.tsv                # local target domains
@@ -21,7 +21,7 @@ consumer-project/
 ├── CLAUDE.harness.md               # symlink to package CLAUDE.md
 ├── modes/                          # symlink to package modes
 ├── templates/                      # symlink to package templates
-└── node_modules/@agent-pattern-labs/public-leads-harness/
+└── node_modules/@agent-pattern-labs/leads-rig/
 ```
 
 ## Source Of Truth

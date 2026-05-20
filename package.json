@@ -1,16 +1,16 @@
 {
-  "name": "@agent-pattern-labs/public-leads-harness",
-  "version": "0.1.2",
+  "name": "@agent-pattern-labs/leads-rig",
+  "version": "0.1.3",
   "description": "Agentic public-web lead discovery harness with portable ingest artifacts",
   "type": "module",
   "author": "Razroo",
-  "homepage": "https://github.com/Agent-Pattern-Labs/leads-agentic-harness#readme",
+  "homepage": "https://github.com/Agent-Pattern-Labs/leads-rig#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Agent-Pattern-Labs/leads-agentic-harness.git"
+    "url": "git+https://github.com/Agent-Pattern-Labs/leads-rig.git"
   },
   "bugs": {
-    "url": "https://github.com/Agent-Pattern-Labs/leads-agentic-harness/issues"
+    "url": "https://github.com/Agent-Pattern-Labs/leads-rig/issues"
   },
   "publishConfig": {
     "access": "public"

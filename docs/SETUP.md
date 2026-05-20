@@ -19,7 +19,7 @@ The generated config files are ignored in git. They are created for local smoke 
 ## Consumer Project
 
 ```bash
-npx -p @agent-pattern-labs/public-leads-harness create-public-leads-harness my-lead-project
+npx -p @agent-pattern-labs/leads-rig create-public-leads-harness my-lead-project
 cd my-lead-project
 npm install
 ```

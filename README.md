@@ -1,4 +1,4 @@
-# @agent-pattern-labs/public-leads-harness
+# @agent-pattern-labs/leads-rig
 
 Agentic public-web lead discovery harness for portable, source-backed lead artifacts. It uses a package-oriented harness shape with an installable npm package, `iso/` source for multi-agent config, mode files, deterministic local helpers, batch orchestration, and a verifier gate.
 
@@ -18,7 +18,7 @@ npm install
 npm run verify
 npm run smoke:iso
 
-npx -p @agent-pattern-labs/public-leads-harness create-public-leads-harness my-lead-project
+npx -p @agent-pattern-labs/leads-rig create-public-leads-harness my-lead-project
 npx public-leads crawl --domains example.com --out data/lead-results.json
 npx public-leads pipeline --input data/domains.tsv --ingest --target-project /path/to/cold-agent-leads
 npx public-leads validate --input examples/sample-leads.json
@@ -43,7 +43,7 @@ Legacy aliases `lead-harness` and `create-leads-harness` remain available for co
 
 ## Publishing
 
-The npm package publishes as `@agent-pattern-labs/public-leads-harness` with public scoped access. The GitHub Actions publish workflow expects `NPM_TOKEN` to be available as a repo or organization secret.
+The npm package publishes as `@agent-pattern-labs/leads-rig` with public scoped access. The GitHub Actions publish workflow expects `NPM_TOKEN` to be available as a repo or organization secret.
 
 ```bash
 gh workflow run publish.yml --ref main
@@ -53,7 +53,7 @@ gh run watch
 You can also publish by creating a GitHub release for the package version:
 
 ```bash
-gh release create v0.1.0 --title v0.1.0 --generate-notes
+gh release create v0.1.3 --title v0.1.3 --generate-notes
 ```
 
 The package version must not already exist on npm.

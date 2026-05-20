@@ -20,7 +20,7 @@ const pkgJsonPath = join(PROJECT_DIR, 'package.json');
 if (existsSync(pkgJsonPath)) {
   try {
     const pkg = JSON.parse(readFileSync(pkgJsonPath, 'utf8'));
-    if (new Set(['@agent-pattern-labs/public-leads-harness', 'public-leads-harness', 'leads-agentic-harness']).has(pkg.name) && PROJECT_DIR === PKG_ROOT) {
+    if (new Set(['@agent-pattern-labs/leads-rig', '@agent-pattern-labs/public-leads-harness', 'public-leads-harness', 'leads-agentic-harness']).has(pkg.name) && PROJECT_DIR === PKG_ROOT) {
       console.log('public-leads sync: skipping (running inside harness repo).');
       process.exit(0);
     }
