@@ -74,6 +74,22 @@
           "items": { "type": "string" },
           "default": []
         },
+        "phone": {
+          "type": "string",
+          "description": "Optional normalized phone number found near the public contact evidence."
+        },
+        "socialUrls": {
+          "type": "array",
+          "items": { "type": "string" },
+          "default": [],
+          "description": "Optional public social/profile URLs found on the same source page."
+        },
+        "contactUrls": {
+          "type": "array",
+          "items": { "type": "string" },
+          "default": [],
+          "description": "Optional public scheduling or contact URLs found on the same source page."
+        },
         "foundAt": {
           "type": "string",
           "format": "date-time"
@@ -117,6 +133,9 @@
         "title": { "type": "string" },
         "statusCode": { "type": "integer" },
         "emailsFound": { "type": "integer" },
+        "phonesFound": { "type": "integer" },
+        "socialUrlsFound": { "type": "integer" },
+        "contactUrlsFound": { "type": "integer" },
         "error": { "type": "string" }
       }
     }

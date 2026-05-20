@@ -1,6 +1,6 @@
 {
   "name": "@agent-pattern-labs/public-leads-harness",
-  "version": "0.1.0",
+  "version": "0.1.2",
   "description": "Agentic public-web lead discovery harness with portable ingest artifacts",
   "type": "module",
   "author": "Razroo",

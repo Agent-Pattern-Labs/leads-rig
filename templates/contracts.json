@@ -30,6 +30,9 @@
         },
         { "name": "confidence", "type": "integer", "required": true, "min": 0, "max": 100 },
         { "name": "warnings", "type": "json" },
+        { "name": "phone", "type": "string" },
+        { "name": "socialUrls", "type": "json" },
+        { "name": "contactUrls", "type": "json" },
         { "name": "foundAt", "type": "datetime" }
       ],
       "formats": {
