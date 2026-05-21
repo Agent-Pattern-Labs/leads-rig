@@ -4,7 +4,7 @@ Agentic public-web lead discovery harness. It crawls company domains, extracts r
 
 ## Hard Limits
 
-- [H1] Only collect public-source business contact data. Do not infer, guess, brute-force, or enrich private email addresses. Every lead needs a source URL and evidence excerpt.
+- [H1] Only collect public-source business contact data. Do not infer, guess, brute-force, or enrich private email addresses. Every lead needs a source URL and evidence excerpt. The primary goal is named people, not generic company inboxes.
 - [H2] Respect robots.txt, terms, rate limits, and site intent. If a page blocks crawling or is not public, record a warning and move on.
 - [H3] Never send outreach from this harness. The output is reviewable lead records and ingest-ready artifacts, not email campaigns.
 - [H4] Use file-backed artifacts before ingest. A subagent prose summary is not enough; write validated JSON/JSONL first, then ingest.
@@ -18,7 +18,7 @@ Agentic public-web lead discovery harness. It crawls company domains, extracts r
 - [D2] Use deterministic local helpers when they can validate, normalize, manifest, preflight, postflight, or ingest artifacts.
 - [D3] Read the active mode file before executing. Mode files own output shapes and gates.
 - [D4] Prefer official company websites and high-signal pages: home, contact, about, team, leadership, people, press, blog, careers, and legal pages.
-- [D5] Keep artifacts source-backed. Every emitted lead should include `domain`, `sourceUrl`, `evidence`, `emailType`, `extractionMethod`, `verificationStatus`, and `confidence`.
+- [D5] Keep artifacts source-backed. Every emitted lead should include `domain`, `sourceUrl`, `evidence`, `emailType`, `extractionMethod`, `verificationStatus`, and `confidence`. Reject generic catch-all inboxes such as `info@`, `hello@`, `contact@`, `support@`, `team@`, and similar aliases; if no named person is available, prefer a `contact_path` record instead.
 
 ## Procedure
 

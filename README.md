@@ -6,10 +6,12 @@ Agentic public-web lead discovery harness for portable, source-backed lead artif
 
 - Crawls public company websites through agent workflows.
 - Produces source-backed lead artifacts matching the local lead-ingest contract.
-- Validates lead JSON/JSONL before database handoff.
+- Validates lead JSON/JSONL before database handoff and rejects generic catch-all inboxes such as `info@` and `hello@`.
 - Builds a local manifest for batch auditability.
 - Submits validated payloads to a configured ingest API.
 - Ships OpenCode, Claude Code, Cursor, Codex, and Pi harness config from one `iso/` source.
+
+The harness is optimized to find named people who can actually be contacted. When only a general company contact path exists, it should emit a `contact_path` record rather than a generic organizational inbox.
 
 ## Core Commands
 

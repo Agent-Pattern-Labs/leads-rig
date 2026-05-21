@@ -28,13 +28,14 @@ Required fields:
 - Prioritize home, contact, about, team, leadership, people, press, blog, careers, and legal pages.
 - Respect robots.txt, paywalls, login walls, and obvious anti-scraping notices.
 - Do not infer email formats. Do not brute-force guessed addresses.
+- Prefer named people over organizational inboxes. Do not emit generic catch-all emails such as `info@`, `hello@`, `contact@`, `support@`, `team@`, or similar aliases. If only a general contact path exists, emit `contact_path` instead.
 - Keep contact forms as `emailType: "contact_path"` with empty `email`.
 - Mark operational no-contact inboxes such as `noreply`, `abuse`, `security`, and `legal` as `blocked` with confidence `0`.
 
 ## Quality Heuristics
 
 - `person`: named person or person-like email with source context.
-- `role`: public role inbox such as `sales@`, `partnerships@`, or `press@`.
+- `role`: public role inbox only when it is clearly role-specific and not a generic catch-all alias.
 - `contact_path`: public form or page where no email is available.
 - `blocked`: public address that should not be used for outbound.
 

@@ -82,4 +82,4 @@ The package also carries the `@razroo/iso-*` helper ecosystem for trace, guard, 
 - page visits
 - ingest requests
 
-The validator intentionally accepts the same defaults the local runtime normalizes, but it fails missing source evidence, invalid URL fields, invalid `emailType`, invalid `verificationStatus`, invalid confidence, and person/role leads without email.
+The validator intentionally accepts the same defaults the local runtime normalizes, but it fails missing source evidence, invalid URL fields, invalid `emailType`, invalid `verificationStatus`, invalid confidence, person/role leads without email, and generic catch-all inboxes such as `info@`, `hello@`, or similar organizational aliases.
