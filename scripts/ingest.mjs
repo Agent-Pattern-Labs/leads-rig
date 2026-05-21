@@ -9,7 +9,7 @@ Usage:
   public-leads ingest --input <file> [--api <base-url>] [--ingest-path </path>]
                       [--operator-email <email>] [--operator-email-header <header>]
                       [--auth-header <header>] [--auth-scheme <scheme>]
-                      [--token <token>] [--token-env ADMIN_API_TOKEN]
+                      [--token <token>] [--token-env PUBLIC_LEADS_API_TOKEN]
                       [--target-project /path/to/cold-agent-leads]
                       [--job-id <id>] [--out data/ingest-response.json] [--dry-run]
 
@@ -18,7 +18,7 @@ Defaults are read from config/profile.yml when present:
   api.auth_header, api.auth_scheme, api.auth_token_env, api.target_project
 
 Compatibility fallbacks are still accepted:
-  --admin-email, api.admin_email, api.admin_token_env, $PUBLIC_LEADS_API_TOKEN
+  --admin-email, api.admin_email, api.admin_token_env, $ADMIN_API_TOKEN, --target-project
 `;
 
 const opts = parseArgs(process.argv.slice(2));

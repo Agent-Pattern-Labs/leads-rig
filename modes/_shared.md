@@ -45,6 +45,7 @@ Confidence should reflect source quality, person specificity, domain match, and 
 ```bash
 npx public-leads validate --input data/lead-results.json
 npx public-leads manifest --input data/lead-results.json
-npx public-leads ingest --input data/lead-results.json --dry-run
+PUBLIC_LEADS_API=https://cold-agent-leads.example.com npx public-leads ingest --input data/lead-results.json --dry-run
+npx public-leads pipeline --input data/domains.tsv --ingest
 npx public-leads verify
 ```

@@ -51,7 +51,7 @@ write('package.json', JSON.stringify({
     'update-harness': 'npm install @agent-pattern-labs/leads-rig@latest && public-leads sync',
   },
   dependencies: {
-    '@agent-pattern-labs/leads-rig': '^0.1.3',
+    '@agent-pattern-labs/leads-rig': '^0.1.4',
   },
   engines: {
     node: '>=20.6.0',
@@ -143,7 +143,7 @@ npm run verify
 opencode
 \`\`\`
 
-Update \`config/profile.yml\` with your ingest API settings and add domains to \`data/domains.tsv\` or \`data/pipeline.md\`.
+Set \`PUBLIC_LEADS_API\`, \`PUBLIC_LEADS_API_TOKEN\`, and \`PUBLIC_LEADS_OPERATOR_EMAIL\` for upstream ingest. Add domains to \`data/domains.tsv\` or \`data/pipeline.md\`.
 `);
 
 console.log('\nNext: npm install, then edit config/profile.yml and data/domains.tsv.\n');

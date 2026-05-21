@@ -20,7 +20,7 @@ Read domains from the first available source:
 5. For browser-heavy batch work, use `batch/batch-runner.sh --parallel 2`.
 6. Validate every artifact with `npx public-leads validate`.
 7. Merge validated artifacts into a manifest with `npx public-leads manifest --input <artifact>`.
-8. Ingest with `npx public-leads pipeline --ingest --target-project /path/to/cold-agent-leads` only when upload is requested.
+8. Ingest with `npx public-leads pipeline --ingest` only when upload is requested and upstream API env vars are configured.
 
 ## Output
 

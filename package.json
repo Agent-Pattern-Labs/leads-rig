@@ -1,6 +1,6 @@
 {
   "name": "@agent-pattern-labs/leads-rig",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Agentic public-web lead discovery harness with portable ingest artifacts",
   "type": "module",
   "author": "Razroo",
@@ -181,6 +181,6 @@
     "@razroo/iso": "^0.3.1",
     "@razroo/iso-eval": "^0.4.0",
     "@razroo/iso-harness": "^0.8.0",
-    "@razroo/iso-route": "^0.5.3"
+    "@razroo/iso-route": "^0.6.0"
   }
 }

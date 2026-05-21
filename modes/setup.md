@@ -9,7 +9,7 @@ Use this when the user asks to configure or inspect the lead harness.
    - `data/domains.tsv`
    - `data/pipeline.md`
    - direct domains in the user request
-3. Confirm the ingest API settings:
+3. Confirm the upstream ingest API settings:
    - `api.base_url`
    - `api.ingest_path`
    - `api.operator_email`
@@ -17,7 +17,8 @@ Use this when the user asks to configure or inspect the lead harness.
    - `api.auth_header`
    - `api.auth_scheme`
    - `api.auth_token_env`
-   - `api.target_project` when using a local Cold Agent Leads checkout for `.env` credentials
+   - or `PUBLIC_LEADS_API`, `PUBLIC_LEADS_API_TOKEN`, and `PUBLIC_LEADS_OPERATOR_EMAIL`
+   - `api.target_project` only when intentionally reading credentials from a local Cold Agent Leads checkout
 4. Run `npx public-leads verify`.
 
 ## Output

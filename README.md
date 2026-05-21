@@ -20,9 +20,9 @@ npm run smoke:iso
 
 npx -p @agent-pattern-labs/leads-rig create-public-leads-harness my-lead-project
 npx public-leads crawl --domains example.com --out data/lead-results.json
-npx public-leads pipeline --input data/domains.tsv --ingest --target-project /path/to/cold-agent-leads
+PUBLIC_LEADS_API=https://cold-agent-leads.example.com npx public-leads pipeline --input data/domains.tsv --ingest
 npx public-leads validate --input examples/sample-leads.json
-npx public-leads ingest --input examples/sample-leads.json --dry-run --out output/sample-ingest.json
+PUBLIC_LEADS_API=https://cold-agent-leads.example.com npx public-leads ingest --input examples/sample-leads.json --dry-run --out output/sample-ingest.json
 batch/batch-runner.sh --help
 ```
 
@@ -32,12 +32,27 @@ The default reference client posts to the Cold Agent Leads ingest API:
 
 ```http
 POST /api/lead-ingests
-Authorization: Bearer $ADMIN_API_TOKEN
+Authorization: Bearer $PUBLIC_LEADS_API_TOKEN
 X-Admin-Email: admin@example.com
 Content-Type: application/json
 ```
 
-All endpoint details are configurable through `config/profile.yml`, CLI flags, environment variables, or `--target-project /path/to/cold-agent-leads` for reading that app's `.env` at runtime. Payloads contain `jobId`, `domains`, `leads`, `results`, and `errors`, with the schema defined in `templates/lead-schema.json`.
+For upstream ingest, set `PUBLIC_LEADS_API`, `PUBLIC_LEADS_API_TOKEN`, and `PUBLIC_LEADS_OPERATOR_EMAIL`; no local Postgres or local Cold Agent Leads server is required. Endpoint details are configurable through environment variables, `config/profile.yml`, or CLI flags. `--target-project /path/to/cold-agent-leads` remains available only as compatibility for reading a local app `.env`. Payloads contain `jobId`, `domains`, `leads`, `results`, and `errors`, with the schema defined in `templates/lead-schema.json`.
+
+Run from a Cold Agent Leads checkout without installing local package dependencies:
+
+```bash
+cd /Users/charlie/Razroo/cold-agent-leads
+export PUBLIC_LEADS_API=https://cold-agent-leads.example.com
+export PUBLIC_LEADS_API_TOKEN=...
+export PUBLIC_LEADS_OPERATOR_EMAIL=admin@example.com
+npx -p @agent-pattern-labs/leads-rig public-leads pipeline \
+  --domains example.com \
+  --ingest \
+  --out data/lead-results.json \
+  --manifest data/lead-manifest.json \
+  --ingest-out data/ingest-response.json
+```
 
 Legacy aliases `lead-harness` and `create-leads-harness` remain available for compatibility.
 
@@ -53,7 +68,7 @@ gh run watch
 You can also publish by creating a GitHub release for the package version:
 
 ```bash
-gh release create v0.1.3 --title v0.1.3 --generate-notes
+gh release create v0.1.4 --title v0.1.4 --generate-notes
 ```
 
 The package version must not already exist on npm.

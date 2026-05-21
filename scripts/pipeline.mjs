@@ -23,11 +23,11 @@ Usage:
                         [--manifest data/lead-manifest.json]
                         [--max-pages 10] [--min-confidence 30]
                         [--ingest | --upload] [--dry-run]
-                        [--target-project /path/to/cold-agent-leads]
+                        [--api https://cold-agent-leads.example.com]
 
 Examples:
   public-leads pipeline --domains example.com,example.org
-  public-leads pipeline --input data/domains.tsv --ingest --target-project /path/to/cold-agent-leads
+  PUBLIC_LEADS_API=https://cold-agent-leads.example.com public-leads pipeline --input data/domains.tsv --ingest
 `;
 
 const opts = parseArgs(process.argv.slice(2));

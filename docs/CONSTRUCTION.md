@@ -37,4 +37,4 @@
 6. Run `npm audit`.
 7. Run `npm pack` and confirm generated runtime surfaces are included.
 8. Scaffold a clean consumer project and test install-time sync from the packed package or source tree.
-9. Publish through GitHub Actions with `gh workflow run publish.yml --ref main`, or create a published release with `gh release create v0.1.3 --title v0.1.3 --generate-notes`.
+9. Publish through GitHub Actions with `gh workflow run publish.yml --ref main`, or create a published release with `gh release create v0.1.4 --title v0.1.4 --generate-notes`.
