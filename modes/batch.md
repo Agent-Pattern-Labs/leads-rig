@@ -10,7 +10,7 @@ Prefer:
 batch/batch-runner.sh --parallel 2
 ```
 
-The runner delegates to `scripts/batch-orchestrator.mjs`, which uses `@razroo/iso-orchestrator` for durable workflow records in `.public-leads-runs/`, bounded fan-out, and state updates.
+The runner delegates to `scripts/batch-orchestrator.mjs`, which uses `@agent-pattern-labs/iso-orchestrator` for durable workflow records in `.public-leads-runs/`, bounded fan-out, and state updates.
 
 ## Input
 

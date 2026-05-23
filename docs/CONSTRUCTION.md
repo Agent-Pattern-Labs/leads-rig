@@ -14,7 +14,7 @@
 | Deterministic helpers | `scripts/crawl.mjs`, `scripts/pipeline.mjs`, `scripts/validate-leads.mjs`, `scripts/manifest.mjs`, `scripts/ingest.mjs`, `scripts/batch-orchestrator.mjs` |
 | Consumer scaffold | `create-public-leads-harness <dir>` writes local config, input, output, and ignore files |
 | Consumer sync | `public-leads sync` symlinks shared harness files from the installed package |
-| Batch orchestration | `batch/batch-runner.sh` delegates to `@razroo/iso-orchestrator` with bounded parallelism |
+| Batch orchestration | `batch/batch-runner.sh` delegates to `@agent-pattern-labs/iso-orchestrator` with bounded parallelism |
 | Verification gates | `npm run verify`, `npm run smoke:iso`, sample validate/manifest/ingest, `npm pack` |
 
 ## Maintainer Rules

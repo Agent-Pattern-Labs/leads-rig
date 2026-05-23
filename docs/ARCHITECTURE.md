@@ -68,10 +68,10 @@ domain input
 | `scripts/validate-leads.mjs` | Normalizes and validates JSON/JSONL lead artifacts |
 | `scripts/manifest.mjs` | Records validated batches in `data/lead-manifest.json` |
 | `scripts/ingest.mjs` | Posts to the configured ingest endpoint |
-| `scripts/batch-orchestrator.mjs` | Durable batch runner using `@razroo/iso-orchestrator` |
+| `scripts/batch-orchestrator.mjs` | Durable batch runner using `@agent-pattern-labs/iso-orchestrator` |
 | `verify-pipeline.mjs` | Repo/consumer health gate |
 
-The package also carries the `@razroo/iso-*` helper ecosystem for trace, guard, ledger, cache, canon, context, preflight, postflight, prioritize, lineage, redact, migrate, score, and timeline commands.
+The package also carries the `@agent-pattern-labs/iso-*` helper ecosystem for trace, guard, ledger, cache, canon, context, preflight, postflight, prioritize, lineage, redact, migrate, score, and timeline commands.
 
 ## Data Contract
 

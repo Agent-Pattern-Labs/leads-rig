@@ -6,7 +6,7 @@ import { existsSync } from 'fs';
 import { mkdir, readFile, rm, writeFile } from 'fs/promises';
 import { dirname, join, resolve } from 'path';
 import { fileURLToPath } from 'url';
-import { runWorkflow } from '@razroo/iso-orchestrator';
+import { runWorkflow } from '@agent-pattern-labs/iso-orchestrator';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const PKG_ROOT = resolve(__dirname, '..');
