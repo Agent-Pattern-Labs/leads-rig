@@ -12,6 +12,7 @@ Agentic public-web lead discovery harness for portable, source-backed lead artif
 - Ships OpenCode, Claude Code, Cursor, Codex, and Pi harness config from one `iso/` source.
 
 The harness is optimized to find named people who can actually be contacted. When only a general company contact path exists, it should emit a `contact_path` record rather than a generic organizational inbox.
+CLI summaries distinguish total reviewable records from `goodLeads`; only non-generic `person` email records with a named human owner visible in the evidence count as good leads. Role, shared, departmental, unknown-owner, blocked, unsupported, or unnamed person-like emails are rejected by validation.
 
 ## Core Commands
 
@@ -70,7 +71,7 @@ gh run watch
 You can also publish by creating a GitHub release for the package version:
 
 ```bash
-gh release create v0.1.4 --title v0.1.4 --generate-notes
+gh release create v0.1.6 --title v0.1.6 --generate-notes
 ```
 
 The package version must not already exist on npm.

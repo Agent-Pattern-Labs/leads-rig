@@ -57,7 +57,7 @@ async function main() {
     console.log(JSON.stringify({ output: out, validation, summary: validation.summary }, null, 2));
   } else {
     console.log(`crawl: wrote ${relativeProjectPath(resolveProjectPath(out))}`);
-    console.log(`domains=${validation.summary.domainCount} leads=${validation.summary.leadCount} results=${validation.summary.resultCount} errors=${payload.errors.length}`);
+    console.log(`domains=${validation.summary.domainCount} leads=${validation.summary.leadCount} goodLeads=${validation.summary.goodLeadCount} results=${validation.summary.resultCount} errors=${payload.errors.length}`);
   }
 
   if (!validation.ok) {

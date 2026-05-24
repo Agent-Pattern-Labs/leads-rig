@@ -58,7 +58,7 @@ try {
 function printReport(report) {
   const rel = relativeProjectPath(report.input);
   console.log(`${report.ok ? 'OK' : 'ERROR'} ${rel}`);
-  console.log(`domains=${report.summary.domainCount} leads=${report.summary.leadCount} results=${report.summary.resultCount} avgConfidence=${report.summary.averageConfidence}`);
+  console.log(`domains=${report.summary.domainCount} leads=${report.summary.leadCount} goodLeads=${report.summary.goodLeadCount} results=${report.summary.resultCount} avgConfidence=${report.summary.averageConfidence}`);
   if (Object.keys(report.summary.byType).length > 0) {
     console.log(`types=${Object.entries(report.summary.byType).map(([type, count]) => `${type}:${count}`).join(', ')}`);
   }

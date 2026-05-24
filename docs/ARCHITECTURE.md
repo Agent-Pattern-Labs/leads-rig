@@ -82,4 +82,4 @@ The package also carries the `@agent-pattern-labs/iso-*` helper ecosystem for tr
 - page visits
 - ingest requests
 
-The validator intentionally accepts the same defaults the local runtime normalizes, but it fails missing source evidence, invalid URL fields, invalid `emailType`, invalid `verificationStatus`, invalid confidence, person/role leads without email, and generic catch-all inboxes such as `info@`, `hello@`, or similar organizational aliases.
+The validator intentionally accepts the same defaults the local runtime normalizes, but it fails missing source evidence, invalid URL fields, invalid `emailType`, invalid `verificationStatus`, invalid confidence, person leads without email, and generic catch-all inboxes such as `info@`, `hello@`, or similar organizational aliases. Any email record must be a named `person` lead with a non-generic email and a human owner visible in the evidence; role inboxes, unknown-owner emails, blocked emails, unsupported emails, and unnamed person-like emails fail validation. Summaries expose `goodLeadCount`, which only counts those high-quality named human email records.

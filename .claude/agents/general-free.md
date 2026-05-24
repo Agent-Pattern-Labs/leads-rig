@@ -27,7 +27,9 @@ Skip this only if the task explicitly says to attach to an existing session.
 ## Do
 
 - Crawl only public, high-signal company pages.
-- Extract emails, role inboxes, contact forms, public names/titles, source URL, evidence, and warnings.
+- Use your judgment on each email candidate: only emit an email lead when public evidence identifies one specific human owner of the address.
+- Extract high-quality named human emails, contact forms, public names/titles, source URL, evidence, and warnings.
+- If an address is shared, role-based, departmental, generic, blocked, or not tied to a visible named human, do not emit it as an email lead; emit a `contact_path` if useful.
 - Emit JSON/JSONL matching `templates/lead-schema.json`.
 - Run `npx public-leads validate --input <file>` before returning a result.
 - Return file paths and terminal status, not a prose-only summary.

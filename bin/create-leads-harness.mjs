@@ -51,7 +51,7 @@ write('package.json', JSON.stringify({
     'update-harness': 'npm install @agent-pattern-labs/leads-rig@latest && public-leads sync',
   },
   dependencies: {
-    '@agent-pattern-labs/leads-rig': '^0.1.4',
+    '@agent-pattern-labs/leads-rig': '^0.1.6',
   },
   engines: {
     node: '>=20.6.0',

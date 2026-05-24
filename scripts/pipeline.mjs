@@ -66,7 +66,7 @@ try {
   const manifest = upsertManifest(manifestPath, out, payload, validation);
   console.log(`pipeline: wrote ${relativeProjectPath(resolveProjectPath(out))}`);
   console.log(`manifest: ${relativeProjectPath(resolveProjectPath(manifestPath))}`);
-  console.log(`domains=${validation.summary.domainCount} leads=${validation.summary.leadCount} results=${validation.summary.resultCount} errors=${payload.errors.length}`);
+  console.log(`domains=${validation.summary.domainCount} leads=${validation.summary.leadCount} goodLeads=${validation.summary.goodLeadCount} results=${validation.summary.resultCount} errors=${payload.errors.length}`);
 
   if (opts.ingest || opts.upload) {
     const ingestResult = await ingestPayload(payload, {
@@ -110,6 +110,7 @@ function upsertManifest(manifestPath, inputPath, payload, validation) {
     batchCount: manifest.batches.length,
     readyForIngest: manifest.batches.filter((item) => item.readyForIngest).length,
     leadCount: manifest.batches.reduce((sum, item) => sum + item.leadCount, 0),
+    goodLeadCount: manifest.batches.reduce((sum, item) => sum + (item.goodLeadCount || 0), 0),
     errorCount: manifest.batches.reduce((sum, item) => sum + item.validation.errors, 0),
     warningCount: manifest.batches.reduce((sum, item) => sum + item.validation.warnings, 0),
   };
