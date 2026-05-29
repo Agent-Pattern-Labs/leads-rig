@@ -1,6 +1,6 @@
 {
   "name": "@agent-pattern-labs/leads-rig",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Agentic public-web lead discovery harness with portable ingest artifacts",
   "type": "module",
   "author": "Razroo",
