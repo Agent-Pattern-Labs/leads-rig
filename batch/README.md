@@ -17,10 +17,11 @@ id	domain	company	notes
 ```bash
 batch/batch-runner.sh --dry-run
 batch/batch-runner.sh --parallel 2
+batch/batch-runner.sh --parallel 2 --timeout-ms 8000
 batch/batch-runner.sh --runner codex --parallel 2
 ```
 
-`--parallel` is capped at `2` to keep browser-heavy work bounded. Worker CLI permission-bypass flags are disabled by default; pass `--allow-unsafe-workers` only in a trusted local workspace when you explicitly want the old unsafe behavior.
+`--parallel` is capped at `2` to keep browser-heavy work bounded. `--timeout-ms` controls the deterministic crawler timeout suggested to workers; the batch default is `8000` to avoid spending too long on dead sites. Worker CLI permission-bypass flags are disabled by default; pass `--allow-unsafe-workers` only in a trusted local workspace when you explicitly want the old unsafe behavior.
 
 The runner writes:
 

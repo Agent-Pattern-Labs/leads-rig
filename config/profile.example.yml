@@ -18,9 +18,22 @@ api:
 
 crawl:
   max_pages: 10
+  timeout_ms: 14000
   max_domains_per_batch: 50
   concurrency: 2
+  page_concurrency: 1
+  dns_concurrency: 8
+  cache_path: ".leadharness-cache/crawler-cache.json"
+  robots_cache_ttl_ms: 86400000
+  dns_cache_ttl_ms: 604800000
+  page_cache: false
+  page_cache_ttl_ms: 0
+  stop_after_good_leads: 0
+  stop_after_contact_path: false
   user_agent: "PublicLeadsBot/0.1 (+https://example.com/public-leads)"
+
+batch:
+  batch_timeout_ms: 8000
 
 lead_policy:
   min_confidence: 30

@@ -25,9 +25,10 @@ id	domain	company	notes
 
 1. Run `batch/batch-runner.sh --dry-run` first unless the user explicitly asks to start immediately.
 2. Use `--parallel 2` by default. Do not exceed 2 browser-heavy workers per round.
-3. Each worker writes `batch/lead-results-{id}.json`.
-4. Validate every artifact and update `data/lead-manifest.json`.
-5. Run `npx public-leads verify`.
+3. For broad queues, keep the batch deterministic crawler timeout near the default `--timeout-ms 8000` unless target quality is known to be high.
+4. Each worker writes `batch/lead-results-{id}.json`.
+5. Validate every artifact and update `data/lead-manifest.json`.
+6. Run `npx public-leads verify`.
 
 ## Output
 

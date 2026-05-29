@@ -21,7 +21,10 @@ Usage:
   public-leads pipeline [--domain example.com | --domains example.com,example.org]
                         [--input data/domains.tsv] [--out data/lead-results.json]
                         [--manifest data/lead-manifest.json]
-                        [--max-pages 10] [--min-confidence 30]
+                        [--max-pages 10] [--timeout-ms 14000] [--min-confidence 30]
+                        [--concurrency 2] [--page-concurrency 1] [--dns-concurrency 8]
+                        [--stop-after-good-leads 1] [--stop-after-contact-path]
+                        [--cache-path .leadharness-cache/crawler-cache.json] [--page-cache] [--page-cache-ttl-ms 3600000] [--no-cache]
                         [--ingest | --upload] [--dry-run]
                         [--api https://cold-agent-leads.example.com]
 
@@ -47,10 +50,21 @@ try {
   const payload = await crawlDomains(domains, {
     maxPages: opts.maxPages || profile.maxPages,
     minConfidence: opts.minConfidence || profile.minConfidence,
+    timeoutMs: opts.timeoutMs || profile.timeoutMs,
+    concurrency: opts.concurrency || profile.concurrency,
+    pageConcurrency: opts.pageConcurrency || profile.pageConcurrency,
+    dnsConcurrency: opts.dnsConcurrency || profile.dnsConcurrency,
     userAgent: opts.userAgent || profile.userAgent,
     includeBlocked: Boolean(opts.includeBlocked),
     delayMs: opts.delayMs,
-    timeoutMs: opts.timeoutMs,
+    cachePath: opts.cachePath || profile.cachePath,
+    noCache: Boolean(opts.noCache),
+    robotsCacheTtlMs: opts.robotsCacheTtlMs || profile.robotsCacheTtlMs,
+    dnsCacheTtlMs: opts.dnsCacheTtlMs || profile.dnsCacheTtlMs,
+    pageCache: opts.pageCache || profile.pageCache,
+    pageCacheTtlMs: opts.pageCacheTtlMs || profile.pageCacheTtlMs,
+    stopAfterGoodLeads: opts.stopAfterGoodLeads || profile.stopAfterGoodLeads,
+    stopAfterContactPath: opts.stopAfterContactPath || profile.stopAfterContactPath,
     jobId: opts.jobId,
   });
   writeJson(resolveProjectPath(out), payload);

@@ -7,6 +7,7 @@ import { mkdir, readFile, rm, writeFile } from 'fs/promises';
 import { dirname, join, resolve } from 'path';
 import { fileURLToPath } from 'url';
 import { runWorkflow } from '@agent-pattern-labs/iso-orchestrator';
+import { loadProfileConfig } from '../lib/leadharness-leads.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const PKG_ROOT = resolve(__dirname, '..');
@@ -37,6 +38,7 @@ Options:
   --retry-failed       Only retry rows marked failed
   --start-from N       Start from numeric id N
   --max-retries N      Max failed retries per domain (default: 2)
+  --timeout-ms N       Deterministic crawler page timeout in worker prompt (default: 8000)
   --workflow-id ID     Durable workflow id (default: public-leads-batch)
   -h, --help           Show help
 
@@ -113,6 +115,7 @@ async function main(opts) {
 }
 
 function parseArgs(argv) {
+  const profile = loadProfileConfig();
   const opts = {
     runner: process.env.PUBLIC_LEADS_BATCH_RUNNER || process.env.LEAD_HARNESS_BATCH_RUNNER || 'opencode',
     parallel: 1,
@@ -121,6 +124,7 @@ function parseArgs(argv) {
     retryFailed: false,
     startFrom: 0,
     maxRetries: 2,
+    timeoutMs: positiveInt(process.env.PUBLIC_LEADS_BATCH_TIMEOUT_MS || process.env.LEAD_HARNESS_BATCH_TIMEOUT_MS || profile.batchTimeoutMs || 8_000, 'batch timeout'),
     workflowId: 'public-leads-batch',
   };
 
@@ -138,6 +142,7 @@ function parseArgs(argv) {
     else if (arg === '--retry-failed') opts.retryFailed = true;
     else if (arg === '--start-from') opts.startFrom = nonNegativeInt(next(), '--start-from');
     else if (arg === '--max-retries') opts.maxRetries = positiveInt(next(), '--max-retries');
+    else if (arg === '--timeout-ms') opts.timeoutMs = positiveInt(next(), '--timeout-ms');
     else if (arg === '--workflow-id') opts.workflowId = sanitizeWorkflowId(next());
     else if (arg === '-h' || arg === '--help') opts.help = true;
     else throw new Error(`unknown option: ${arg}`);
@@ -299,7 +304,7 @@ async function processDomain(workflow, item, opts) {
     retries,
   });
 
-  const prompt = buildWorkerPrompt(item, artifact);
+  const prompt = buildWorkerPrompt(item, artifact, opts);
   const run = await withWorkerLiveness(workflow, item, logFile, () => runWorker(opts, prompt, logFile));
   const statuses = parseStatusLines(run.output);
   const status = statuses.get(item.id);
@@ -356,11 +361,14 @@ async function processDomain(workflow, item, opts) {
   return { id: item.id, status: 'completed', artifact: status.artifact || artifact, leadCount: status.leadCount ?? 0 };
 }
 
-function buildWorkerPrompt(item, artifact) {
+function buildWorkerPrompt(item, artifact, opts) {
   return `Process this assigned public-leads domain.
 
 Assignment:
 ${JSON.stringify({ ...item, artifact }, null, 2)}
+
+Prefer the deterministic crawler first:
+npx public-leads crawl --domain ${item.domain} --out ${artifact} --timeout-ms ${opts.timeoutMs} --stop-after-good-leads 1 --stop-after-contact-path
 
 Write the artifact exactly to ${artifact}. Validate it with:
 npx public-leads validate --input ${artifact}

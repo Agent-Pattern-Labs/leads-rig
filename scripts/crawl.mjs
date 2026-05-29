@@ -17,7 +17,10 @@ const USAGE = `public-leads crawl -- crawl public company pages into a lead arti
 Usage:
   public-leads crawl [--domain example.com | --domains example.com,example.org]
                      [--input data/domains.tsv] [--out data/lead-results.json]
-                     [--max-pages 10] [--min-confidence 30]
+                     [--max-pages 10] [--timeout-ms 14000] [--min-confidence 30]
+                     [--concurrency 2] [--page-concurrency 1] [--dns-concurrency 8]
+                     [--stop-after-good-leads 1] [--stop-after-contact-path]
+                     [--cache-path .leadharness-cache/crawler-cache.json] [--page-cache] [--page-cache-ttl-ms 3600000] [--no-cache]
                      [--include-blocked] [--allow-empty] [--json]
 
 When no domain or input is supplied, the first existing file is used:
@@ -44,10 +47,21 @@ async function main() {
   const payload = await crawlDomains(domains, {
     maxPages: opts.maxPages || profile.maxPages,
     minConfidence: opts.minConfidence || profile.minConfidence,
+    timeoutMs: opts.timeoutMs || profile.timeoutMs,
+    concurrency: opts.concurrency || profile.concurrency,
+    pageConcurrency: opts.pageConcurrency || profile.pageConcurrency,
+    dnsConcurrency: opts.dnsConcurrency || profile.dnsConcurrency,
     userAgent: opts.userAgent || profile.userAgent,
     includeBlocked: Boolean(opts.includeBlocked),
     delayMs: opts.delayMs,
-    timeoutMs: opts.timeoutMs,
+    cachePath: opts.cachePath || profile.cachePath,
+    noCache: Boolean(opts.noCache),
+    robotsCacheTtlMs: opts.robotsCacheTtlMs || profile.robotsCacheTtlMs,
+    dnsCacheTtlMs: opts.dnsCacheTtlMs || profile.dnsCacheTtlMs,
+    pageCache: opts.pageCache || profile.pageCache,
+    pageCacheTtlMs: opts.pageCacheTtlMs || profile.pageCacheTtlMs,
+    stopAfterGoodLeads: opts.stopAfterGoodLeads || profile.stopAfterGoodLeads,
+    stopAfterContactPath: opts.stopAfterContactPath || profile.stopAfterContactPath,
     jobId: opts.jobId,
   });
   writeJson(resolveProjectPath(out), payload);

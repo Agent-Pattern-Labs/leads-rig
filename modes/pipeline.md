@@ -15,7 +15,7 @@ Read domains from the first available source:
 1. Build a deduped candidate list.
 2. Drop domains already represented in the manifest unless the user asks to retry.
 3. Prefer the deterministic end-to-end command for normal public pages:
-   `npx public-leads pipeline --input data/domains.tsv --out data/lead-results.json`
+   `npx public-leads pipeline --input data/domains.tsv --out data/lead-results.json --concurrency 2 --page-concurrency 1`
 4. Use browser/MCP workers only when the deterministic crawler cannot reach a public page or the site requires rendering.
 5. For browser-heavy batch work, use `batch/batch-runner.sh --parallel 2`.
 6. Validate every artifact with `npx public-leads validate`.
