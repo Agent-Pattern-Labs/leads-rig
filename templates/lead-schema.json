@@ -74,10 +74,30 @@
           "items": { "type": "string" },
           "default": []
         },
+        "linkedinUrl": {
+          "type": "string",
+          "description": "Optional canonical public LinkedIn profile or organization URL."
+        },
         "phone": {
           "type": "string",
           "description": "Optional normalized phone number found near the public contact evidence."
         },
+        "address": {
+          "type": "string",
+          "description": "Optional complete public business address."
+        },
+        "streetAddress": {
+          "type": "string",
+          "description": "Optional street-address component."
+        },
+        "location": {
+          "type": "string",
+          "description": "Optional display location for the lead."
+        },
+        "city": { "type": "string" },
+        "region": { "type": "string" },
+        "postalCode": { "type": "string" },
+        "country": { "type": "string" },
         "socialUrls": {
           "type": "array",
           "items": { "type": "string" },
