@@ -12,6 +12,7 @@ Agentic public-web lead discovery harness. It crawls company domains, extracts r
 - [H5] Do not paste API tokens, proxy credentials, or cookies into task prompts or summaries. Reference `config/profile.yml` or environment variables by name only.
 - [H6] For batch domain crawling, dispatch at most 2 subagents per round and wait for final artifact paths before launching the next round.
 - [H7] Before using browser/MCP crawling in a batch round, run Geometra cleanup: `geometra_list_sessions()` then `geometra_disconnect({ closeBrowser: true })`.
+- [H9] Platform activity enrichment may use only dated public activity returned by an official public API or feed. Never request LinkedIn, X, Instagram, or Facebook profile pages, and never describe profile presence or a source-observation timestamp as user activity.
 
 ## Defaults
 
@@ -32,6 +33,11 @@ Agentic public-web lead discovery harness. It crawls company domains, extracts r
 7. Create or update the manifest with `npx public-leads manifest`.
 8. Ingest only validated payloads with `npx public-leads ingest`.
 9. Run `npx public-leads verify` before ending a batch workflow.
+
+For refreshable platform selection, run `public-leads enrich:platform` on a
+validated artifact. Preserve `primaryPlatformSelectionMethod`: only
+`observed_public_activity` represents measured activity;
+`fallback_presence_priority` is a routing fallback, not a usage claim.
 
 ## Routing
 

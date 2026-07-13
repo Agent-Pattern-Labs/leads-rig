@@ -17,6 +17,7 @@ const commands = {
   validate: 'scripts/validate-leads.mjs',
   manifest: 'scripts/manifest.mjs',
   ingest: 'scripts/ingest.mjs',
+  'enrich:platform': 'scripts/enrich-platform.mjs',
   batch: 'scripts/batch-orchestrator.mjs',
   verify: 'verify-pipeline.mjs',
   sync: 'bin/sync.mjs',
@@ -186,6 +187,7 @@ Core commands:
   validate      Validate lead artifacts against the local contract
   manifest      Build/update data/lead-manifest.json from lead artifacts
   ingest        Submit a validated payload to the configured ingest API
+  enrich:platform  Measure public activity and select a refreshable primary platform
   verify        Run the full harness verification gate
   sync          Re-run consumer-project symlink sync
 

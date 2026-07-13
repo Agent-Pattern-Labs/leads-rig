@@ -86,4 +86,12 @@ Lead records preserve optional enrichment fields such as `linkedinUrl`, `phone`,
 `address`, `streetAddress`, `location`, `city`, `region`, `postalCode`, and
 `country` through normalization, deduplication, and ingest.
 
+Primary-platform enrichment adds person-matched `socialProfiles` plus a compact
+consumer-facing selection (`primaryPlatform`, URL, confidence, method,
+evidence, checked timestamp, and next-refresh timestamp). Dated activity is
+measured only through official public GitHub, Bluesky, or YouTube endpoints.
+Networks without a permitted activity endpoint remain presence-only. The
+default refresh interval is seven days, and a fresh checkpoint prevents repeat
+requests.
+
 The validator intentionally accepts the same defaults the local runtime normalizes, but it fails missing source evidence, invalid URL fields, invalid `emailType`, invalid `verificationStatus`, invalid confidence, person leads without email, and generic catch-all inboxes such as `info@`, `hello@`, or similar organizational aliases. Any email record must be a named `person` lead with a non-generic email and a human owner visible in the evidence; role inboxes, unknown-owner emails, blocked emails, unsupported emails, and unnamed person-like emails fail validation. Summaries expose `goodLeadCount`, which only counts those high-quality named human email records.

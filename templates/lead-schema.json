@@ -104,6 +104,22 @@
           "default": [],
           "description": "Optional public social/profile URLs found on the same source page."
         },
+        "socialProfiles": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/socialProfile" },
+          "default": [],
+          "description": "Public person-matched profiles with refreshable activity measurements."
+        },
+        "primaryPlatform": { "type": "string" },
+        "primaryPlatformUrl": { "type": "string" },
+        "primaryPlatformConfidence": { "type": "integer", "minimum": 0, "maximum": 100 },
+        "primaryPlatformSelectionMethod": {
+          "type": "string",
+          "enum": ["", "observed_public_activity", "fallback_presence_priority"]
+        },
+        "primaryPlatformEvidence": { "type": "string" },
+        "primaryPlatformCheckedAt": { "type": "string" },
+        "primaryPlatformNextRefreshAt": { "type": "string" },
         "contactUrls": {
           "type": "array",
           "items": { "type": "string" },
@@ -114,6 +130,28 @@
           "type": "string",
           "format": "date-time"
         }
+      }
+    },
+    "socialProfile": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": ["platform", "url", "activityStatus"],
+      "properties": {
+        "platform": { "type": "string" },
+        "url": { "type": "string" },
+        "username": { "type": "string" },
+        "activityStatus": {
+          "type": "string",
+          "enum": ["presence_only", "observed", "observed_inactive", "unavailable", "error"]
+        },
+        "activityWindowDays": { "type": "integer", "minimum": 0 },
+        "publicActivityCount": { "type": "integer", "minimum": 0 },
+        "lastPublicActivityAt": { "type": "string" },
+        "checkedAt": { "type": "string" },
+        "nextRefreshAt": { "type": "string" },
+        "activitySourceUrl": { "type": "string" },
+        "evidence": { "type": "string" },
+        "stale": { "type": "boolean" }
       }
     },
     "result": {
